@@ -24,7 +24,7 @@ return {
 		"neovim/nvim-lspconfig",
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			vim.lsp.set_log_level("ERROR") 
+			vim.lsp.set_log_level("ERROR")
 			for _, server in ipairs(langs) do
 				vim.lsp.config(server, {
 					capabilities = capabilities,
