@@ -22,7 +22,6 @@ keymap.set({ 'n', 'i', 'v' }, '<C-s>', function()
   vim.cmd('write')
 end, { noremap = true, silent = true })
 
-vim.keymap.set('i', '<C-H>', '<C-w>', { noremap = true })
 keymap.set('n', '<C-z>', 'u', { silent = true, noremap = true })
 keymap.set('i', '<C-z>', '<C-o>u', { silent = true, noremap = true })
 

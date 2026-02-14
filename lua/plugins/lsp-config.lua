@@ -8,20 +8,24 @@ local langs = {
 return {
 	{
 		"mason-org/mason.nvim",
+    cmd = "Mason",
 		config = function()
 			require("mason").setup()
 		end,
 	},
 	{
 		"mason-org/mason-lspconfig.nvim",
+    event = "BufReadPre",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = langs,
+				--NOTE:: not needed at every startup
+        --ensure_installed = langs,
 			})
 		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
+    event = "BufReadPre",
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			vim.lsp.set_log_level("ERROR")
