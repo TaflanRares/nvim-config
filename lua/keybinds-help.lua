@@ -4,6 +4,8 @@ local keybinds = {
 	-- File Operations
 	{ mode = "n", key = "<leader>cd", desc = "Change to file directory" },
   { mode = "n", key = "<C-n>", desc = "Toggle neo-tree file menu" },
+  { mode = "n", key = "[cnt]gcc", desc = "Comments the following [cnt] lines" },
+  { mode = "v", key = "gc", desc = "Comments the selected lines" },
 
 	-- Telescope
 	{ mode = "n", key = "<C-p>", desc = "Find files" },
@@ -34,7 +36,7 @@ local keybinds = {
 	{ mode = "n", key = "<leader>gd", desc = "Go to definition" },
 	{ mode = "n", key = "<leader>ca", desc = "Code actions" },
 	{ mode = "v", key = "<leader>ca", desc = "Code actions" },
-	{ mode = "n", key = "<C-e>", desc = "Show diagnostics" },
+ 	{ mode = "n", key = "<C-e>", desc = "Show diagnostics" },
 	{ mode = "i", key = "<C-e>", desc = "Show diagnostics" },
 
 	-- Completion
@@ -42,6 +44,14 @@ local keybinds = {
 	{ mode = "i", key = "<C-b>", desc = "Scroll docs up" },
 	{ mode = "i", key = "<C-f>", desc = "Scroll docs down" },
 	{ mode = "i", key = "<CR>", desc = "Confirm completion" },
+
+  -- Compile and debug
+  { mode = "n", key = "F5", desc = "Compiles and runs current directory"},
+  { mode = "n", key = "F6", desc = "Debug start"},
+  { mode = "n", key = "F10", desc = "Debug step over"},
+  { mode = "n", key = "F11", desc = "Debug step into"},
+  { mode = "n", key = "F12", desc = "Debug step out"},
+  { mode = "n", key = "<Leader>b", desc = "Debug add breakpoint"},
 }
 
 -- Mode colors
