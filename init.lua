@@ -17,6 +17,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- file requirements
 require("options")
-require("keymaps")
 require("lazy").setup("plugins")
+require("keymaps")
 require("keybinds-help").setup({ keymap = "<leader>?" })

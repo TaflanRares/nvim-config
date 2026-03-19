@@ -26,5 +26,20 @@ return {
 		}
 
 		alpha.setup(dashboard.opts)
+
+    vim.api.nvim_create_autocmd("FileType", {
+			pattern = "alpha",
+			callback = function()
+				vim.api.nvim_create_autocmd("BufUnload", {
+					buffer = 0,
+					once = true,
+					callback = function()
+						vim.schedule(function()
+							vim.cmd("filetype detect")
+						end)
+					end,
+				})
+			end,
+		})
 	end,
 }

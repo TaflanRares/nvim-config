@@ -8,7 +8,6 @@ return {
 		local dap = require("dap")
 		local dapui = require("dapui")
 
-		-- Setup dap-ui with better layout
 		dapui.setup({
 			layouts = {
 				{
@@ -32,22 +31,13 @@ return {
 			},
 		})
 
-		-- Configure listeners - ONLY auto-open, NOT auto-close
 		dap.listeners.before.attach.dapui_config = function()
 			dapui.open()
 		end
 		dap.listeners.before.launch.dapui_config = function()
 			dapui.open()
 		end
-		-- Don't auto-close - let user close manually
-		-- dap.listeners.before.event_terminated.dapui_config = function()
-		-- 	dapui.close()
-		-- end
-		-- dap.listeners.before.event_exited.dapui_config = function()
-		-- 	dapui.close()
-		-- end
 
-		-- CodeLLDB Adapter
 		dap.adapters.codelldb = {
 			type = "server",
 			port = "${port}",
@@ -57,7 +47,6 @@ return {
 			},
 		}
 
-		-- C/C++/Rust Configurations
 		local codelldb_config = {
 			{
 				name = "Launch (stop at entry)",
@@ -69,7 +58,7 @@ return {
 				cwd = "${workspaceFolder}",
 				stopOnEntry = true,
 				args = {},
-				-- Show program output in console
+
 				console = "integratedTerminal",
 			},
 			{
@@ -93,7 +82,6 @@ return {
 			},
 		}
 
-		-- Apply configurations to all three languages
 		dap.configurations.c = codelldb_config
 		dap.configurations.cpp = codelldb_config
 		dap.configurations.rust = codelldb_config
