@@ -4,6 +4,101 @@ return {
 		"rcarriga/nvim-dap-ui",
 		"nvim-neotest/nvim-nio",
 	},
+	lazy = true,
+	keys = {
+		{
+			"<F5>",
+			function()
+				require("dap").terminate()
+			end,
+			desc = "Debug: Terminate",
+		},
+		{
+			"<F6>",
+			function()
+				require("dap").continue()
+			end,
+			desc = "Debug: Continue",
+		},
+		{
+			"<F10>",
+			function()
+				require("dap").step_over()
+			end,
+			desc = "Debug: Step Over",
+		},
+		{
+			"<F11>",
+			function()
+				require("dap").step_into()
+			end,
+			desc = "Debug: Step Into",
+		},
+		{
+			"<F12>",
+			function()
+				require("dap").step_out()
+			end,
+			desc = "Debug: Step Out",
+		},
+		{
+			"<Leader>b",
+			function()
+				require("dap").toggle_breakpoint()
+			end,
+			desc = "Debug: Toggle Breakpoint",
+		},
+		{
+			"<Leader>B",
+			function()
+				require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+			end,
+			desc = "Debug: Conditional Breakpoint",
+		},
+		{
+			"<Leader>dt",
+			function()
+				require("dapui").toggle()
+			end,
+			desc = "Debug: Toggle UI",
+		},
+		{
+			"<Leader>dc",
+			function()
+				require("dapui").close()
+			end,
+			desc = "Debug: Close UI",
+		},
+		{
+			"<Leader>dr",
+			function()
+				require("dap").repl.open()
+			end,
+			desc = "Debug: Open REPL",
+		},
+		{
+			"<Leader>dl",
+			function()
+				require("dap").run_last()
+			end,
+			desc = "Debug: Run Last",
+		},
+		{
+			"<Leader>de",
+			function()
+				require("dapui").eval()
+			end,
+			desc = "Debug: Evaluate expression",
+		},
+		{
+			"<Leader>de",
+			function()
+				require("dapui").eval()
+			end,
+			mode = "v",
+			desc = "Debug: Evaluate selection",
+		},
+	},
 	config = function()
 		local dap = require("dap")
 		local dapui = require("dapui")
@@ -58,7 +153,6 @@ return {
 				cwd = "${workspaceFolder}",
 				stopOnEntry = true,
 				args = {},
-
 				console = "integratedTerminal",
 			},
 			{
@@ -85,33 +179,5 @@ return {
 		dap.configurations.c = codelldb_config
 		dap.configurations.cpp = codelldb_config
 		dap.configurations.rust = codelldb_config
-
-		-- Keybindings
-		vim.keymap.set("n", "<F5>", dap.terminate, { desc = "Debug: Terminate" })
-		vim.keymap.set("n", "<F6>", dap.continue, { desc = "Debug: Continue" })
-		vim.keymap.set("n", "<F10>", dap.step_over, { desc = "Debug: Step Over" })
-		vim.keymap.set("n", "<F11>", dap.step_into, { desc = "Debug: Step Into" })
-		vim.keymap.set("n", "<F12>", dap.step_out, { desc = "Debug: Step Out" })
-
-		vim.keymap.set("n", "<Leader>b", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
-		vim.keymap.set("n", "<Leader>B", function()
-			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-		end, { desc = "Debug: Conditional Breakpoint" })
-
-		-- UI controls
-		vim.keymap.set("n", "<Leader>dt", dapui.toggle, { desc = "Debug: Toggle UI" })
-		vim.keymap.set("n", "<Leader>dc", dapui.close, { desc = "Debug: Close UI" })
-
-		-- Debug controls
-		vim.keymap.set("n", "<Leader>dr", dap.repl.open, { desc = "Debug: Open REPL" })
-		vim.keymap.set("n", "<Leader>dl", dap.run_last, { desc = "Debug: Run Last" })
-
-		-- Evaluate expression under cursor
-		vim.keymap.set("n", "<Leader>de", function()
-			dapui.eval()
-		end, { desc = "Debug: Evaluate expression" })
-		vim.keymap.set("v", "<Leader>de", function()
-			dapui.eval()
-		end, { desc = "Debug: Evaluate selection" })
 	end,
 }

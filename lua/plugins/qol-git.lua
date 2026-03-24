@@ -1,48 +1,52 @@
 return {
-  {
-    "lewis6991/gitsigns.nvim",
-    config = function()
-      require("gitsigns").setup({
-        signs = {
-          add          = { text = '│' },
-          change       = { text = '│' },
-          delete       = { text = '_' },
-          topdelete    = { text = '‾' },
-          changedelete = { text = '~' },
-          untracked    = { text = '┆' },
-        },
-        current_line_blame = false,
-        current_line_blame_opts = {
-          virt_text = true,
-          virt_text_pos = 'eol',
-          delay = 500,
-        },
-      })
-      -- keymaps
-      vim.keymap.set('n', ']c', ':Gitsigns next_hunk<CR>')
-      vim.keymap.set('n', '[c', ':Gitsigns prev_hunk<CR>')
-      vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>')
-      vim.keymap.set('n', '<leader>gp', ':Gitsigns preview_hunk<CR>')
-      vim.keymap.set('n', '<leader>gr', ':Gitsigns reset_hunk<CR>')
-      vim.keymap.set('n', '<leader>gs', ':Gitsigns stage_hunk<CR>')
-      vim.keymap.set('n', '<leader>gu', ':Gitsigns undo_stage_hunk<CR>')
-      vim.keymap.set('n', '<leader>gtb', ':Gitsigns toggle_current_line_blame<CR>')
-    end
-  },
-  {
-    "tpope/vim-fugitive"
-  },
-  {
-    "sindrets/diffview.nvim",
-    config = function()
-      require("diffview").setup({
-        enhanced_diff_hl = true,
-      })
-      -- keymaps
-      vim.keymap.set('n', '<leader>gd', ':DiffviewOpen<CR>')
-      vim.keymap.set('n', '<leader>gh', ':DiffviewFileHistory<CR>')
-      vim.keymap.set('n', '<leader>gf', ':DiffviewFileHistory %<CR>')
-      vim.keymap.set('n', '<leader>gc', ':DiffviewClose<CR>')
-    end
-  }
+	{
+		"lewis6991/gitsigns.nvim",
+		lazy = true,
+		event = "BufReadPost",
+		keys = {
+			{ "]c", "<cmd>Gitsigns next_hunk<CR>", desc = "Next hunk" },
+			{ "[c", "<cmd>Gitsigns prev_hunk<CR>", desc = "Prev hunk" },
+			{ "<leader>gb", "<cmd>Gitsigns blame_line<CR>", desc = "Blame line" },
+			{ "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>", desc = "Preview hunk" },
+			{ "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", desc = "Reset hunk" },
+			{ "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", desc = "Stage hunk" },
+			{ "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "Undo stage hunk" },
+			{ "<leader>gtb", "<cmd>Gitsigns toggle_current_line_blame<CR>", desc = "Toggle blame" },
+		},
+		opts = {
+			signs = {
+				add = { text = "│" },
+				change = { text = "│" },
+				delete = { text = "_" },
+				topdelete = { text = "‾" },
+				changedelete = { text = "~" },
+				untracked = { text = "┆" },
+			},
+			current_line_blame = false,
+			current_line_blame_opts = {
+				virt_text = true,
+				virt_text_pos = "eol",
+				delay = 500,
+			},
+		},
+	},
+	{
+		"tpope/vim-fugitive",
+		lazy = true,
+		cmd = { "Git", "G", "Gdiffsplit", "Gread", "Gwrite", "Ggrep", "GMove", "GDelete", "GBrowse" },
+	},
+	{
+		"sindrets/diffview.nvim",
+		lazy = true,
+		cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
+		keys = {
+			{ "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Diff open" },
+			{ "<leader>gh", "<cmd>DiffviewFileHistory<CR>", desc = "File history" },
+			{ "<leader>gf", "<cmd>DiffviewFileHistory %<CR>", desc = "Current file history" },
+			{ "<leader>gc", "<cmd>DiffviewClose<CR>", desc = "Diff close" },
+		},
+		opts = {
+			enhanced_diff_hl = true,
+		},
+	},
 }

@@ -2,14 +2,14 @@ return {
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x",
 	dependencies = {
-		"nvim-lua/plenary.nvim",
+	  "nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
 		"nvim-tree/nvim-web-devicons",
 	},
 	event = "VimEnter",
 	config = function()
 		require("neo-tree").setup({
-			close_if_last_window = false, -- if true, closes nvim when alpha is last window
+			close_if_last_window = false,
 			window = { position = "left", width = 30 },
 		})
 
@@ -24,7 +24,6 @@ return {
 			end
 		end, { silent = true })
 
-		-- Only auto-open neo-tree when opening a file, not on dashboard
 		vim.api.nvim_create_autocmd("BufEnter", {
 			once = true,
 			callback = function()
@@ -32,7 +31,6 @@ return {
 				local ft = vim.bo[buf].filetype
 				local name = vim.api.nvim_buf_get_name(buf)
 
-				-- Don't open on alpha/dashboard or empty buffers
 				if ft == "alpha" or ft == "dashboard" or name == "" then
 					return
 				end
