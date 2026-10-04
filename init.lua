@@ -9,6 +9,8 @@ local modules = {
   "config.statusline",
   "config.dashboard",
   "config.lsp",
+  "config.netrw",
+  "config.buffer"
 }
 
 for _, module in ipairs(modules) do
